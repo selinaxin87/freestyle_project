@@ -1,10 +1,4 @@
 def test_steam_prices():
-    # Download the CSV file and verify it exists
-    if not os.path.isfile(filepath):
-        print("DOWNLOADING", filepath)
-        !wget -q $url
-    assert os.path.isfile(filepath)
-
     # Test the conversion function
     assert conversion("USD", 100) == 100
     assert conversion("EUR", 100) == 112.61

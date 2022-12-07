@@ -6,14 +6,9 @@ app = Flask(__name__)
 def show_game(app_id):
     # Download the CSV file if it doesn't already exist
     url = "https://raw.githubusercontent.com/lukes/ISO-3166-Countries-with-Regional-Codes/master/all/all.csv"
-    filepath = "all.csv"
-
-    if not os.path.isfile(filepath):
-        print("DOWNLOADING", filepath)
-        !wget -q $url
 
     # Read the CSV file into a DataFrame
-    country_codes_df = read_csv("all.csv")
+    country_codes_df = read_csv(url)
     country_codes = country_codes_df.to_dict("records")
 
     # Define a function to convert prices to USD
