@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cheapest Price for Game</title>
+</head>
+<body>
+    <form action="/game" method="POST">
+        <label>Enter the app ID for the game:</label>
+        <input type="text" name="app_id" required>
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if lowest_price == 1000000 %}
+        <p>This game is not available for purchase.</p>
+    {% else %}
+        <p>Your selected game is cheapest in {{ lowest_currency }}.</p>
+        <p>The lowest price in US dollar value is ${{ lowest_price }}.</p>
+    {% endif %}
+</body>
+</html>

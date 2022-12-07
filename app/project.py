@@ -1,3 +1,8 @@
+#if __name__ == "__main__":
+ #   main()
+
+
+
 import os
 
 url = "https://raw.githubusercontent.com/lukes/ISO-3166-Countries-with-Regional-Codes/master/all/all.csv"
@@ -25,10 +30,6 @@ def conversion(lowest_currency,lowest_price):
         if "Realtime Currency Exchange Rate" in data3:
             rt = float(data3["Realtime Currency Exchange Rate"]["5. Exchange Rate"])
             converted_price = rt * lowest_price
-            print("-----------")
-            print(rt)
-            print(lowest_price)
-            print(converted_price)
             return converted_price
         else:
             # print("Exchange Rate does not exist")
