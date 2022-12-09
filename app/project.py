@@ -1,7 +1,3 @@
-
-
-
-
 import os
 from pandas import read_csv
 import urllib.request, json 
