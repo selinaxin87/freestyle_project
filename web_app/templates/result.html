@@ -38,7 +38,12 @@
                     <div>
                         {% if isInvalid == True %}
                         <p>Invalid app ID</p>
-                        {% elif lowest_price == 1000000 %}
+                        <script>
+                            setTimeout(function () {
+                                location.href = "/"
+                            }, 3000)
+                        </script>
+                        {% elif lowest_price == '1000000' %}
                         <p>This game is not available for purchase.</p>
                         {% else %}
                         <p>Your selected game is cheapest in {{ lowest_currency }}.</p>

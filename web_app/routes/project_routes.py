@@ -44,11 +44,14 @@ def conversion(lowest_currency,lowest_price):
             # print("Exchange Rate does not exist")
             return None
 
-def show_game_func(app_id):
+def show_game_func(app_id_int):
+    app_id = "%d" % app_id_int
+    logger.error(app_id)
 
     isInvalid = True
     lowest_price=1000000
     lowest_currency="none"
+    
 
     url = "https://raw.githubusercontent.com/lukes/ISO-3166-Countries-with-Regional-Codes/master/all/all.csv"
     country_codes_df = read_csv(url)
@@ -58,7 +61,7 @@ def show_game_func(app_id):
     app_list=[]
 
     for c in country_codes:
-        all_codes.append(str(c["alpha-2"]))
+        all_codes.append(str(c["alpha-2"])) 
 
     #print(all_codes)
 
@@ -69,9 +72,13 @@ def show_game_func(app_id):
     for d in data["applist"]["apps"]:
         app_list.append(str(d["appid"]))
 
-    while app_id not in app_list:
+    _app_id_flag = False
+    for _app_id in app_list:
+        if _app_id == app_id:
+            _app_id_flag = True
+            break
+    if _app_id_flag != True:
         return isInvalid, lowest_currency, lowest_price
-
     #print(app_list)
 
 
@@ -88,6 +95,7 @@ def show_game_func(app_id):
             else:
                 if len(data2[app_id]["data"])==0:
                     # print("This game is yet to be released. Please check later.")
+                    isInvalid = False
                     return isInvalid, lowest_currency, lowest_price
                     break
                 else:
@@ -107,6 +115,7 @@ def show_game_func(app_id):
         isInvalid = False
         return isInvalid, lowest_currency, lowest_price
     # not find
+    isInvalid = False
     return isInvalid, lowest_currency, lowest_price
 
 
@@ -114,7 +123,7 @@ def show_game_func(app_id):
 def show_game(app_id):
     try:
         isInvalid, lowest_currency, lowest_price = show_game_func(app_id)
-        return render_template("result.html", isInvalid=isInvalid, lowest_currency=lowest_currency, lowest_price=lowest_price)
+        return render_template("result.html", isInvalid=isInvalid, lowest_currency=lowest_currency, lowest_price="%d"%lowest_price)
         pass
     except Exception as err:
         logger.error(err)
