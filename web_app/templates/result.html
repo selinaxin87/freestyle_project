@@ -26,7 +26,7 @@
                 SteamPC
             </div>
             <div class="col text-center">
-                -
+                
             </div>
             <div class="col text-end">
                 <a href="/">Home</a>
@@ -43,7 +43,7 @@
                                 location.href = "/"
                             }, 3000)
                         </script>
-                        {% elif lowest_price == '1000000' %}
+                        {% elif not_purchase == True %}
                         <p>This game is not available for purchase.</p>
                         {% else %}
                         <p>Your selected game is cheapest in {{ lowest_currency }}.</p>
