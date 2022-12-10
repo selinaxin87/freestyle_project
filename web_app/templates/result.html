@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SteamPC</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.0/axios.min.js"></script>
+</head>
+<style>
+    .header {
+        background: #00a7db;
+        color: #fff;
+        height: 60px;
+        line-height: 60px;
+    }
+
+    .header a {
+        color: #fff;
+    }
+</style>
+
+<body>
+    <div class="container-fluid">
+        <div class="row header">
+            <div class="col">
+                SteamPC
+            </div>
+            <div class="col text-center">
+                
+            </div>
+            <div class="col text-end">
+                <a href="/">Home</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="container text-center">
+                    <div>
+                        {% if isInvalid == True %}
+                        <p>Invalid app ID. Please go back to home page and try again.</p>
+                        {% elif not_purchase == True %}
+                        <p>This game is yet to be released. Please check later.</p>
+                        {% else %}
+                        <p>Your selected game is cheapest in {{ lowest_currency }}.</p>
+                        <p>The lowest price in US dollar value is ${{ lowest_price }}.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <hr>
+                © Copyright2022 @ Parents&Child
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
