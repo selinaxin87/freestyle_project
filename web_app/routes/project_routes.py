@@ -60,7 +60,7 @@ def show_game_func(app_id_int):
     # return  isInvalid, lowest_currency, lowest_price
     
 
-    url = "https://raw.githubusercontent.com/lukes/ISO-3166-Countries-with-Regional-Codes/master/all/all.csv"
+    url = "https://raw.githubusercontent.com/rayhas2work/countrycode-alpha2/main/cc.csv"
     country_codes_df = read_csv(url)
     country_codes = country_codes_df.to_dict("records")
 
