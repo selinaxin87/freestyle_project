@@ -51,6 +51,13 @@ def show_game_func(app_id_int):
     isInvalid = True
     lowest_price=1000000
     lowest_currency="none"
+
+
+    # isInvalid = False
+    # lowest_price=999
+    # lowest_currency = "CNY"
+
+    # return  isInvalid, lowest_currency, lowest_price
     
 
     url = "https://raw.githubusercontent.com/lukes/ISO-3166-Countries-with-Regional-Codes/master/all/all.csv"
@@ -122,8 +129,12 @@ def show_game_func(app_id_int):
 @home_routes.route("/game/<int:app_id>",  methods=["POST","GET"])
 def show_game(app_id):
     try:
-        isInvalid, lowest_currency, lowest_price = show_game_func(app_id)
-        return render_template("result.html", isInvalid=isInvalid, lowest_currency=lowest_currency, lowest_price="%d"%lowest_price)
+        not_purchase = True
+        isInvalid, lowest_currency, lowest_price, not_purchase = show_game_func(app_id)
+        if lowest_price != 1000000:
+            not_purchase = False
+        _lowest_price = "%.2f" % lowest_price
+        return render_template("result.html", isInvalid=isInvalid, lowest_currency=lowest_currency, lowest_price=_lowest_price, not_purchase=not_purchase)
         pass
     except Exception as err:
         logger.error(err)
