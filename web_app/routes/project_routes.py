@@ -51,6 +51,7 @@ def show_game_func(app_id_int):
     isInvalid = True
     lowest_price=1000000
     lowest_currency="none"
+    not_purchase=False
 
 
     # isInvalid = False
@@ -85,7 +86,7 @@ def show_game_func(app_id_int):
             _app_id_flag = True
             break
     if _app_id_flag != True:
-        return isInvalid, lowest_currency, lowest_price
+        return isInvalid, lowest_currency, lowest_price,not_purchase
     #print(app_list)
 
 
@@ -103,7 +104,7 @@ def show_game_func(app_id_int):
                 if len(data2[app_id]["data"])==0:
                     # print("This game is yet to be released. Please check later.")
                     isInvalid = False
-                    return isInvalid, lowest_currency, lowest_price
+                    return isInvalid, lowest_currency, lowest_price,not_purchase,not_purchase
                     break
                 else:
                     price = data2[app_id]["data"]["price_overview"]["final"]/100
@@ -120,10 +121,10 @@ def show_game_func(app_id_int):
         # print("The lowest price in US dollar value is $%.2f."%(lowest_price))
         # OK
         isInvalid = False
-        return isInvalid, lowest_currency, lowest_price
+        return isInvalid, lowest_currency, lowest_price,not_purchase
     # not find
     isInvalid = False
-    return isInvalid, lowest_currency, lowest_price
+    return isInvalid, lowest_currency, lowest_price,not_purchase
 
 
 @home_routes.route("/game/<int:app_id>",  methods=["POST","GET"])
@@ -133,9 +134,9 @@ def show_game(app_id):
         isInvalid, lowest_currency, lowest_price, not_purchase = show_game_func(app_id)
         if lowest_price != 1000000:
             not_purchase = False
-        _lowest_price = "%.2f" % lowest_price
-        return render_template("result.html", isInvalid=isInvalid, lowest_currency=lowest_currency, lowest_price=_lowest_price, not_purchase=not_purchase)
-        pass
+            _lowest_price = "%.2f" % lowest_price
+            return render_template("result.html", isInvalid=isInvalid, lowest_currency=lowest_currency, lowest_price=_lowest_price, not_purchase=not_purchase)
+            pass
     except Exception as err:
         logger.error(err)
         return render_template("error.html")
